@@ -1,0 +1,419 @@
+#include<iostream>
+#include<string.h>
+#include<stdlib.h>
+using namespace std;
+
+int x1 = 2017000;
+int size = 0;
+int n=5;
+int size1 = 3;
+int var1 = 0;
+int size3 = 1;
+
+
+struct Student{
+	int Student_ID;
+	char Student_Name[20];
+	char Gender;
+	char P_O_S[4];
+	int Y_O_E;
+	char Grades[5][5];
+	float gpa;
+	
+		
+};
+
+void store(Student *L1)
+{
+	for(int i=0;i<n;i++)
+	{
+		system("cls");
+		float sum=0,x=0;
+		cout<<"*******GIKI CMS*******"<<endl<<endl;
+	    L1[i].Student_ID = ++x1;
+	    cout<<"Student ID Number = "<<x1<<endl<<endl;
+	    cout<<"Enter Name for the Student"<<endl;
+	    cin.ignore();
+	    cin>>L1[i].Student_Name;
+	    cout<<"Enter the Program of the Student "<<endl;
+	    cin.ignore();
+	    cin>>L1[i].P_O_S;
+	    cout<<"Enter the Year of Enrollment of the Student"<<endl;
+	    cin.ignore();
+	    cin>>L1[i].Y_O_E;
+	    cout<<"Enter the Gender of the Student (M/F)"<<endl;
+	    cin.ignore();
+	    cin>>L1[i].Gender;
+	    cout<<"Enter the Grades for 5 sunjects of the Student\n Grades should be A-F"<<endl;
+	    for(int j=0;j<n;j++)
+	    {
+	    	
+		    cout<<"Enter the Grade for Subject "<<j+1<<endl;
+		    cin>>L1[i].Grades[i][j];
+		
+		    if(L1[i].Grades[i][j] == 'A')
+		    {
+			    x = 4;
+	    	}
+		    if(L1->Grades[i][j] == 'B')
+		    {
+			    x = 3;
+		    }
+		    if(L1->Grades[i][j] == 'C')
+		    {
+			    x = 2;
+			}
+		    if(L1->Grades[i][j] == 'D')
+		    {
+			    x = 1;
+		    }
+		    if(L1->Grades[i][j] == 'F')
+		    {
+    		    x = 0;
+		    }
+		sum = sum + x;				
+	    }
+	L1[i].gpa = (sum/20)*4;    
+	cout<<"THE DATA FOR STUDENT "<<i+1<<" HAS BEEN STORED"<<endl;
+	system("pause");
+	system("cls");    
+	}
+	size++;
+}
+
+
+void insertatend(Student *L1)
+{
+	if(size!=0)
+	{
+		float sum=0, x=0;
+	    int num=n;
+	    n=n+1;
+    	cout<<"Enter Reg no. of student\n";
+    	cin>>L1[num].Student_ID;
+    	cin.ignore();
+    	cout<<"Enter name of student\n";
+    	cin>>L1[num].Student_Name;
+    	cout<<"Enter gender of student\n";
+   	    cin>>L1[num].Gender;
+    	cout<<"Enter faculty of student\n";
+    	cin>>L1[num].P_O_S;
+    	cout<<"Enter year of enrollment  of student\n";
+    	cin>>L1[num].Y_O_E;
+    	cout<<"Enter the Grades for 5 sunjects of the Student\n Grades should be A-F"<<endl;
+    	for(int i=0;i<5;i++)
+    	{
+        	cout<<"Enter the Grade for Subject "<<i+1<<endl;
+        	cin>>L1[num].Grades[0][i];
+        	if(L1[num].Grades[0][i] == 'A')
+		    {
+			    x = 4;
+	    	}
+		    if(L1[num].Grades[0][i] == 'B')
+		    {
+			    x = 3;
+		    }
+		    if(L1[num].Grades[0][i] == 'C')
+		    {
+			    x = 2;
+			}
+		    if(L1[num].Grades[0][i] == 'D')
+		    {
+			    x = 1;
+		    }
+		    if(L1[num].Grades[0][i] == 'F')
+		    {
+    		    x = 0;
+		    }
+		sum = sum + x;				
+        }
+	    L1[num].gpa = (sum/20)*4;   	
+	    }
+	    system("cls");
+}
+
+
+
+void insertafter(Student *L1)
+{
+	int i,pos,ind;
+	float x=0, sum=0;
+	cout<<"After which index you want to add element"<<endl;
+	cin>>ind;
+	pos=ind+1;
+	n=n+1;
+	for(i = n-1; i>pos; i--)
+	{
+		for(int j=0;j<20;j++)
+		{
+		L1[i].Student_Name[j]=L1[i-1].Student_Name[j];
+		}
+		L1[i].Student_ID=L1[i-1].Student_ID;
+		L1[i].Gender=L1[i-1].Gender;
+		for(int j=0;j<4;j++)
+		{
+		L1[i].P_O_S[j]=L1[i-1].P_O_S[j];
+		}
+		L1[i].gpa=L1[i-1].gpa;
+	}
+	cout<<"Enter Reg No of student\n";
+	cin>>L1[pos].Student_ID;
+	cout<<"Enter Name of student\n";
+	cin>>L1[pos].Student_Name;
+	cout<<"Enter Gender of student\n";
+	cin>>L1[pos].Gender;
+	cout<<"Enter Faculty of student\n";
+	cin>>L1[pos].P_O_S;
+	cout<<"Enter year of enrollment  of student\n";
+	cin>>L1[pos].Y_O_E;
+	cout<<"Enter the Grades for 5 sunjects of the Student\n Grades should be A-F"<<endl;
+   	for(int i=0;i<5;i++)
+    {
+        cout<<"Enter the Grade for Subject "<<i+1<<endl;
+        cin>>L1[pos].Grades[2][i];
+        if(L1[pos].Grades[2][i] == 'A')
+	    {
+			x = 4;
+	    }
+	    if(L1[pos].Grades[2][i] == 'B')
+		{
+		   x = 3;
+		}
+		if(L1[pos].Grades[2][i] == 'C')
+		{
+			x = 2;
+		}
+		if(L1[pos].Grades[2][i] == 'D')
+		{
+			x = 1;
+		}
+		if(L1[pos].Grades[2][i] == 'F')
+		{
+    		x = 0;
+		}
+		sum = sum + x;				
+    }
+	L1[pos].gpa = (sum/20)*4;   	
+	system("cls");
+	size++;
+}
+
+
+void insertbefore(Student *L1)
+{
+	int i,pos,ind;
+	float x=0,sum=0;
+	cout<<"Before which index you want to add element"<<endl;
+	cin>>ind;
+	pos=ind-1;
+	n=n+1;
+	for(i = n-1; i>pos; i--)
+	{
+		for(int j=0;j<20;j++)
+		{
+		    L1[i].Student_Name[j]=L1[i-1].Student_Name[j];
+		}
+		L1[i].Student_ID=L1[i-1].Student_ID;
+		L1[i].Gender=L1[i-1].Gender;
+		for(int j=0;j<4;j++)
+		{
+	    	L1[i].P_O_S[j]=L1[i-1].P_O_S[j];
+		}
+		L1[i].gpa=L1[i-1].gpa;
+	}
+	cout<<"Enter Reg No. of student\n";
+	cin>>L1[pos].Student_ID;
+	cout<<"Enter name of student\n";
+	cin>>L1[pos].Student_Name;
+	cout<<"Enter gender of student\n";
+	cin>>L1[pos].Gender;
+	cout<<"Enter faculty of student\n";
+	cin>>L1[pos].P_O_S;
+	cout<<"Enter year of enrollment  of student\n";
+	cin>>L1[pos].Y_O_E;
+	for(int i=0;i<5;i++)
+    {
+      	cout<<"Enter his grade in course no "<<i+1<<endl;
+       	cin>>L1[pos].Grades[1][i];
+       	if(L1[pos].Grades[1][i] == 'A')
+	    {
+		    x = 4;
+	   	}
+	   if(L1[pos].Grades[1][i] == 'B')
+	    {
+		    x = 3;
+	    }
+	   if(L1[pos].Grades[1][i] == 'C')
+	    {
+		    x = 2;
+		}
+	    if(L1[pos].Grades[1][i] == 'D')
+	    {
+		    x = 1;
+	    }
+	    if(L1[pos].Grades[1][i] == 'F')
+	    {
+    	    x = 0;
+        }
+	    sum = sum + x;				
+    }
+	L1[pos].gpa = (sum/20)*4;   	
+	system("cls");
+	size++;
+}
+
+
+void Union(Student *L1,Student *L2,Student *L3)
+{
+    int flag=0;
+    cout<<"Enter data to find intersection and store it in a new array"<<endl;
+    cout<<"Instructions : Please enter same names and Reg No of atleast two students"<<endl;
+    for(int i=0;i<size1;i++)
+    {
+        cout<<"\nEnter data for student no "<<i+1<<" : \n";
+        cout<<"Enter Reg No of student\n";
+        cin>>L2[i].Student_ID;
+        cout<<"Enter name of student\n";
+        cin>>L2[i].Student_Name;
+        cout<<"Enter gender of student\n";
+        cin>>L2[i].Gender;
+        cout<<"Enter faculty of student\n";
+        cin>>L2[i].P_O_S;
+        cout<<"Enter year of enrollment  of student\n";
+        cin>>L2[i].Y_O_E;
+        for(int j=0;j<5;j++)
+        {
+         	cout<<"Enter his grade in course no "<<i+1<<endl;
+       	    cin>>L2[i].Grades[i][j];	
+        }
+    }
+    for(int i=0;i<size;i++)
+    {
+        L3[var1].Student_ID=L1[i].Student_ID;
+        L3[var1].Y_O_E=L1[i].Y_O_E;
+        L3[var1].gpa=L1[i].gpa;
+        L3[var1].Gender=L1[i].Gender;
+        for(int j=0;j<20;j++)
+        {
+            L3[var1].Student_Name[j]=L1[i].Student_Name[j];
+        }
+        for(int j=0;j<4;j++)
+        {
+            L3[var1].P_O_S[j]=L1[i].P_O_S[j];
+        }
+        for(int j=0;j<5;j++)
+        {
+            L3[var1].Grades[i][j]=L1[i].Grades[i][j];
+        }
+        var1++;
+        size3++;
+    }
+    for(int i=0;i<size1;i++)
+    {
+        flag=0;
+        for(int j=0;j<size;j++)
+        {
+            if(L2[i].Student_ID==L1[j].Student_ID)
+            {
+                flag=1;
+                break;
+            }
+        }
+        if(flag==0)
+        {
+            L3[var1].Student_ID=L2[i].Student_ID;
+            L3[var1].Y_O_E=L2[i].Y_O_E;
+            L3[var1].gpa=L2[i].gpa;
+            L3[var1].Gender=L2[i].Gender;
+            for(int j=0;j<20;j++)
+            {
+                L3[var1].Student_Name[j]=L2[i].Student_Name[j];
+            }
+            for(int j=0;j<4;j++)
+            {
+                L3[var1].P_O_S[j]=L2[i].P_O_S[j];
+            }
+            for(int j=0;j<5;j++)
+            {
+                L3[var1].Grades[i][j]=L2[i].Grades[i][j];
+            }
+            var1++;
+            size3++;
+        }
+    }
+}
+
+void Complexity()
+{
+	cout<<"Cost for Storing Function is N*N = N^2"<<endl;
+	cout<<"Cost for Adding after Element Function is N*N*N*N = N^4"<<endl;
+	cout<<"Cost for Adding before Element is N*N*N*N = N^4"<<endl;
+	cout<<"Cost for Adding at End Function is N*N = N^2"<<endl;
+	cout<<"Cost for Union Function is N*N*N*N*N*N*N*N*N*N*N = N^11"<<endl;
+	cout<<"Cost for Display Function is N*N = N^2"<<endl;
+	system("pause");
+}
+
+
+void display(Student *L1)
+{
+    cout<<"NAME\t\tREGNO.\t\tGENDER\t\tFACULTY \tYEAR \t\tGPA \t\tGRADES"<<endl;
+    for(int i=0;i<n;i++)
+	{
+		cout<<L1[i].Student_Name<<"\t\t"<<L1[i].Student_ID;
+		cout<<"\t\t"<<L1[i].Gender<<"\t\t"<<L1[i].P_O_S<<"\t\t"<<L1[i].Y_O_E<<"\t\t"<<L1[i].gpa<<"\t\t";
+		for(int j=0;j<5;j++)
+        {
+            cout<<L1[i].Grades[i][j]<<" ";
+        }
+        cout<<endl;
+	}
+	system("pause");
+}
+
+
+int main()
+{
+	
+	
+	Student *L1 = new Student[n];
+	Student *L2 = new Student[n];
+	Student *L3 = new Student[n];
+	
+	
+	int option = 1;
+	
+	while(option!=8){
+		if(option == 1)
+		{
+			store(L1);
+		}
+		if(option == 2)
+		{
+			display(L1);
+		}
+		if(option == 3)
+		{
+			insertatend(L1);
+		}
+		if(option == 4)
+		{
+	 	    insertafter(L1);
+		}
+		if(option == 5)
+		{
+			insertbefore(L1);
+		}
+		if(option==6)
+		{
+			Union(L1,L2,L3);
+		}
+		if(option==7)
+		{
+			Complexity();
+		}
+		system("cls");
+		cout<<"Choose Menu\n1. Store Again\n2. Display All\n3. Insert at End\n4. Insert After Index\n5. Insert before\n6. Union\n7. Find Asymptotic Cost\n8. EXIT"<<endl;
+		cin>>option;
+	}		
+}
