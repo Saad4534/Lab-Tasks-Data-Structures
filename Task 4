@@ -1,0 +1,229 @@
+// 2017347- M. Saad Nadeem
+#include<iostream>
+#include<stdlib.h>
+#include<fstream>
+using namespace std;
+struct Student{
+	int reg;
+	string name;
+	Student *next;
+	Student *prev;
+	
+	
+};
+
+void Addatbeg(Student *Head)
+{
+	Student *ptr = new Student;
+	cout<<"Enter the Registeration Number of the new Student"<<endl;
+	cin>>ptr->reg;
+	cin.ignore();
+	cout<<"Enter the Name of the new Student"<<endl;
+	getline(cin,ptr->name);
+	ptr->next = Head->next;
+	ptr->prev = Head->next->prev;
+	Head->next->prev = Head;
+	Head->next = ptr;
+
+}
+
+
+void Addatend(Student *Tail)
+{
+	Student *ptr = new Student;
+	cout<<"Enter the Registeration Number of the new Student"<<endl;
+	cin>>ptr->reg;
+	cin.ignore();
+	cout<<"Enter the Name of the new Student"<<endl;
+	getline(cin,ptr->name);
+	Tail->next = ptr;
+	ptr->prev = Tail;
+	ptr->next = NULL;
+	Tail = ptr;
+}
+
+
+void delatbeg(Student *Head)
+{
+	Student *ptr;
+	ptr = Head->next;
+	Head->next = ptr->next;
+	ptr->next->prev = Head;
+	delete(ptr);
+}
+
+
+void delatend(Student *Tail)
+{
+	Student *ptr;
+	ptr = Tail;
+	Tail = ptr->prev;
+	delete(ptr);
+}
+
+
+void delaftertsearch(Student *Head)
+{
+	int reg;
+	cout<<"Enter the Registeration Number"<<endl;
+	cin>>reg;
+	for(Student *temp = Head->next; temp!=NULL; temp = temp->next)
+	{
+		if(reg == temp->reg)
+		{
+			temp->next->prev = temp->prev;
+			temp->prev->next = temp->next;
+			delete(temp);
+			cout<<"Your Desired Data has been deleted"<<endl;
+			return;
+		}
+	}
+}
+
+void display(Student *Head)
+{
+	int i=0;
+	for(Student *temp = Head->next; temp!=NULL; temp = temp->next)
+	{
+		cout<<"Registeration Number of the Student "<<i+1<<" is "<<temp->reg<<endl;
+		cout<<"Name of the Student "<<i+1<<" is "<<temp->name<<endl;
+		cout<<endl;
+		i++;
+	}
+}
+
+
+
+int initialize(Student *head)
+{
+    Student *ptr=head;
+    ifstream fin("sample.txt",ios::app);
+    while(!fin.eof())
+    {
+        fin>>ptr->next->name;
+        fin>>ptr->next->reg;
+        ptr=ptr->next;
+    }
+    fin.close();
+}
+
+
+
+int store(Student *head)
+{
+    ofstream fout("sample1.txt",ios::app) ;
+    Student *ptr=head;
+    while(ptr->next!=NULL)
+    {
+        fout<<ptr->next->name<<endl;
+        fout<<ptr->next->reg<<endl;
+        ptr=ptr->next;
+    }
+    fout.close();
+}
+
+
+
+
+int main()
+{
+	int choice1,choice2,option=10;
+	Student *Head = new Student;
+	Head->next = new Student;
+	Student *Tail = new Student;
+	Head->next->next = Tail;
+	Head->next->prev = Head;
+	Tail->prev = Head->next;
+	Head->prev = NULL;
+	Tail->next = NULL;
+	
+	
+	
+	Head->next->reg = 2017069;
+	Head->next->name = "Ammar Ahmed";
+	Tail->reg = 2017370;
+	Tail->name = "Usama Saleem";
+	
+	while(option!=0)
+	{
+		cout<<"**************************"<<endl;
+	    cout<<"WELCOME TO GIKI CMS "<<endl;
+	    cout<<"**************************"<<endl;
+	    cout<<endl;
+    	cout<<endl;
+    	cout<<"Select Your Choice\n\n1. Add A new Student\n2. Delete data for Student\n3. Display All\n4. Read from File"<<endl;
+    	cin>>choice1;
+    	switch(choice1)
+    	{
+		case 1:
+			{
+				system("cls");
+				cout<<"Select Your Choice\n1. Add at Beginning\n2. Add at End"<<endl;
+				cin>>choice2;
+				switch(choice2)
+				{
+					case 1:
+						{
+							system("cls");
+							Addatbeg(Head);
+							break;
+						}
+					case 2:
+						{
+							system("cls");
+							Addatend(Tail);
+							break;
+						}	
+				}
+			    break;	
+			}
+		case 2:
+			{
+				system("cls");
+				cout<<"Select Your Choice\n1. Delete from Beginning\n2. Delete From End\n3. Delete A specific Registeration Number"<<endl;
+				cin>>choice2;
+				switch(choice2)
+				{
+					case 1:
+						{
+							system("cls");
+							delatbeg(Head);
+							break;
+						}
+					case 2:
+						{
+							system("cls");
+							delatend(Tail);
+							break;
+						}
+					case 3:
+						{
+							system("cls");
+							delaftertsearch(Head);
+							break;
+						}
+				}
+			    break;	
+			}
+		case 3:
+			{
+			    display(Head);
+			    break;
+			}
+		case 4:
+			{
+				initialize(Head);
+				display(Head);
+				break;
+			}
+		default:
+			{
+				exit;
+			}
+    	}
+    	cout<<"Enter any Number to return to the Menu\n Press 0 to exit"<<endl;
+    	cin>>option;
+	}
+	store(Head);
+	
+}
