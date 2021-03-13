@@ -1,0 +1,94 @@
+#include<iostream>
+using namespace std;
+
+struct Balance{
+	
+	char data;
+	Balance *next;
+};
+
+Balance *top = NULL;
+char push();
+bool empty();
+char pop();
+
+bool isbalanced(string expr)
+{
+	for(int i = 0; i<expr.length();i++)
+	{
+		if(expr[i] == '(' || expr[i] == '[' || expr[i] == '{')
+		{
+			push(expr[i]);
+		}
+		else if(expr[i] == ')' || expr[i] == ']' || expr[i] == '}')
+		{
+			empty();
+		}
+		else
+		continue;
+		
+		switch(expr[i]){
+		case ')':
+		{
+			if(pop() == '['|| pop() == '{')
+			return false;
+			else 
+			return true;
+		}
+		case ']':
+		{
+			if(pop() == '('|| pop() == '{')
+			return false;
+			else 
+			return true;
+		}
+		case '}':
+		{
+			if(pop() == '['|| pop() == '(')
+			return false;
+			else 
+			return true;
+		}
+	}
+	}
+}
+
+bool empty()
+{
+	if(top = NULL)
+	return true;
+	else
+	return false;
+}
+char push(char a)
+{
+	Balance *newnode = new Balance;
+	newnode->data = a;
+	newnode->next = top;
+	top = newnode;
+}
+
+char pop()
+{
+	Balance *temp;
+	temp = top;
+	top = top->next;
+	return(temp->data);
+}
+
+
+int main()
+{
+	
+	string expression = "{[()]}";
+	
+	if(isbalanced(expression))
+	{
+		cout<<"Statement is Balanced"<<endl;
+	}
+	else
+	{
+		cout<<"Statement is Balanced"<<endl;
+	}
+	
+}
