@@ -1,0 +1,151 @@
+#include<iostream>
+#include<string.h>
+#include<stdlib.h>
+using namespace std;
+
+//  Queue Implementation
+
+struct Student{
+	
+	string reg_number;
+	
+};
+
+const int N = 10;
+Student Student[N];
+int num = 0;
+
+void Park()
+{
+	if(num==10)
+	{
+		cout<<"Parking Space is full"<<endl;
+	}
+	else
+	{
+		cout<<"Enter Your Car Registeration Number"<<endl;
+	    getline(cin,Student[num].reg_number);
+	    cout<<"Your Car is Parked at Parking Space Number "<<num+1<<endl;
+	    num++;
+	}
+}
+
+void Call()
+{
+	string r;
+	system("cls");
+	cout<<"Enter the Registeration Number of your Car"<<endl;
+	getline(cin,r);
+	for(int i=0;i<10;i++)
+	{
+		if(r==Student[i].reg_number)
+		{
+			if(i!=0)
+			{
+				int k=10;
+				string temp;
+				for(int j=0;j<i;j++)
+				{
+					temp = Student[j].reg_number;
+			    	Student[j].reg_number = Student[j+1].reg_number;
+		    		Student[k].reg_number = temp;
+				    k--;
+				}		
+			}
+			if(i==0)
+			{
+				for(int j=0;j<10;j++)
+				{
+					Student[j].reg_number = Student[j+1].reg_number;
+				}
+				Student[10].reg_number = "empty";
+			}
+			
+		}
+		else
+		{
+			cout<<"No Car Found of Registeration Number "<<i<<endl;
+		}
+	}
+	return;
+	system("pause");
+}
+
+void Position()
+{
+	system("cls");
+	string r;
+	cout<<"Enter the Registeration Number of your Car"<<endl;
+	getline(cin,r);
+	for(int j=0;j<10;j++)
+	{	
+		if(r==Student[j].reg_number)
+		{
+			cout<<"The Position of your Car in the Parking Lot is "<<j+1<<endl;
+		}
+    }
+    return;
+	system("pause");
+}
+
+void Front()
+{
+	system("cls");
+	cout<<"The Car at the front of the Parking Lot is"<<Student[0].reg_number<<endl;
+	return;
+	system("pause");
+}
+
+void Display()
+{
+	system("cls");
+	for(int i=0;i<10;i++)
+	{
+		cout<<i+1<<" "<<Student[i].reg_number<<endl;
+	}
+	return;
+}
+
+
+int main()
+{
+    
+	
+	int choice=10;
+	
+	// The maximum capacity of the parking lot is 10
+	
+	
+	while(choice!=0)
+	{
+		system("cls");
+	    cout<<"Enter choice"<<endl;
+	    cout<<"1. Park your Car\n2. Call your Car\n3. Check the position of your car\n4. Find out which car is at the front\n5. Display\n6. Press 0 to exit Program"<<endl;
+	    cin>>choice;
+		if(choice==1)
+	    {   
+	        Park();
+	    }
+	    if(choice==2)
+	    {   
+	        Call();
+	    }
+	    if(choice==3)
+	    {   
+	        Position();
+	    }
+	    if(choice==4)
+	    {   
+	        Front();
+	    }
+	    if(choice==5)
+	    {   
+	        Display();
+	    }
+	    else
+	    {
+	    	cout<<"Enter Choice Again"<<endl;
+		}
+	}
+	
+}
