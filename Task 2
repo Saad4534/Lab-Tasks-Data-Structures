@@ -1,0 +1,131 @@
+#include <iostream>
+using namespace std;
+struct Node { 
+   char data; 
+   struct Node *next;
+}; 
+
+class Stack{
+	public:
+	Node *top;
+	int size;
+	
+	Stack()
+	{
+		this->top  = NULL;
+		this->size = 0;
+	}
+	
+	void push(char val) {
+	   struct Node* newnode = new Node; 
+	   newnode->data = val;
+	   newnode->next = this->top; 
+	   this->top = newnode; 
+	   this->size++;
+	}
+	
+	char pop() {
+	   char value = '\0';
+	   if(this->top ==NULL)
+	   {
+			return value;
+	   }else {
+	   	  value 	= this->top->data;
+	      this->top = this->top->next;
+	      this->size--;
+	      return value;
+	   }
+	}
+	
+	bool empty()
+	{
+		if(this->top == NULL)
+		{
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	void display() {
+	   struct Node* ptr;
+	   if(this->top==NULL)
+	      cout<<"stack is empty";
+	   else {   
+	      ptr = this->top; 
+	      cout<<"Stack elements are: ";
+	      while (ptr != NULL) {
+	         cout<< ptr->data <<" "; 
+	         ptr = ptr->next; 
+	      } 
+	   }
+	   cout<<endl;
+	}
+};
+
+bool isBalanced(string expr) 
+{ 
+	Stack s;
+	char x; 
+
+	for (int i=0; i < expr.length(); i++) 
+	{
+		if (expr[i]=='('||expr[i]=='['||expr[i]=='{') 
+		{
+			// Push the element in the stack 
+			s.push(expr[i]); 
+			continue; 
+		}else if(expr[i]==')'||expr[i]==']'||expr[i]=='}')
+		{
+			// IF current current character is not opening 
+			// bracket, then it must be closing. So stack 
+			// cannot be empty at this point. 
+			if (s.empty())
+				return false;
+		}else{// non bracket character
+			continue;
+		}
+
+		switch (expr[i]) 
+		{
+		case ')': 
+
+			// Store the top element in x
+			x = s.pop(); 
+			if (x=='{' || x=='[') 
+				return false; 
+			break; 
+
+		case '}': 
+
+			// Store the top element in x
+			x = s.pop(); 
+			if (x=='(' || x=='[') 
+				return false; 
+			break; 
+
+		case ']': 
+
+			// Store the top element in x
+			x = s.pop(); 
+			if (x =='(' || x == '{') 
+				return false; 
+			break; 
+		}
+	} 
+
+	// Check Empty Stack 
+	return (s.empty()); 
+} 
+
+int main() {
+   string expression = "{([)}";
+   
+   if(isBalanced(expression))
+   {
+   		cout<<"Expressoin is balaned"<<endl;
+   }else{
+   		cout<<"Expression is not balanced"<<endl;
+   }
+   return 0;
+} 
