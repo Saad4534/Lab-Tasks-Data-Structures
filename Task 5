@@ -1,0 +1,243 @@
+#include<iostream>
+#include<string.h>
+#include<stdlib.h>
+
+using namespace std;
+
+// Student Data Base using Single Linked List
+
+struct Student{
+
+	int reg;
+	string name;
+	int age;
+	float cgpa;
+	char faculty;
+
+	Student *next;
+};
+
+
+void AddatEnd(Student *Head)
+{
+	for(Student *temp = Head;temp!=NULL;temp=temp->next)
+	{
+		if(temp->next=NULL)
+		{
+			Student *ptr = new Student;
+	        cout<<"Enter Registeration Number of the Student"<<endl;
+	        cin>>ptr->reg;
+	        cin.ignore();
+        	cout<<"Enter Name of the Student"<<endl;
+        	getline(cin,ptr->name);
+        	cout<<"Enter Age of the Student"<<endl;
+        	cin>>ptr->age;
+        	cout<<"Enter CGPA of the Student"<<endl;
+        	cin>>ptr->cgpa;
+         	cout<<"Enter Faculty of the Student"<<endl;
+        	cin>>ptr->faculty;
+        	temp->next = ptr;
+        	ptr->next = NULL;
+ 		}
+	}
+}
+void AddatBeg(Student *Head)
+{
+	Student *ptr = new Student;
+	cout<<"Enter Registeration Number of the Student"<<endl;
+	cin>>ptr->reg;
+	cin.ignore();
+    cout<<"Enter Name of the Student"<<endl;
+    getline(cin,ptr->name);
+    cout<<"Enter Age of the Student"<<endl;
+    cin>>ptr->age;
+    cout<<"Enter CGPA of the Student"<<endl;
+    cin>>ptr->cgpa;
+    cout<<"Enter Faculty of the Student"<<endl;
+    cin>>ptr->faculty;
+    if(Head->next == NULL)
+    {
+    	Head->next = ptr;
+    	ptr->next = NULL;
+	}
+	else
+	{
+		ptr->next = Head->next;
+		Head->next = ptr;
+	}
+}
+
+void Addafter(Student *Head)
+{
+	int reg;
+	cout<<"Enter Registeration Number of the Student You Want to Add after"<<endl;
+	cin>>reg;
+
+	for(Student *temp = Head; temp!=NULL; temp = temp->next)
+	{
+		if(reg == temp->reg)
+		{
+			Student *ptr = new Student;
+        	cout<<"Enter Registeration Number of the Student"<<endl;
+        	cin>>ptr->reg;
+        	cin.ignore();
+            cout<<"Enter Name of the Student"<<endl;
+            getline(cin,ptr->name);
+            cout<<"Enter Age of the Student"<<endl;
+            cin>>ptr->age;
+            cout<<"Enter CGPA of the Student"<<endl;
+            cin>>ptr->cgpa;
+            cout<<"Enter Faculty of the Student"<<endl;
+            cin>>ptr->faculty;
+            ptr->next = temp->next;
+            temp->next = ptr;
+		}
+		else
+		{
+			cout<<"No Registeration Number FOUND"<<endl;
+		}
+
+	}
+}
+
+FindByReg(Student *Head)
+{
+	int reg;
+	cout<<"Enter Reg Number of the Student"<<endl;
+	cin>>reg;
+	for(Student *temp = Head; temp!=NULL; temp= temp->next)
+	{
+		if(reg==temp->reg)
+		{
+			cout<<temp->reg<<endl<<endl;
+			cout<<"Name of the Student is "<<temp->name<<endl;
+			cout<<"Faculty of the Student is "<<temp->faculty<<endl;
+			cout<<"CGPA of the Student is "<<temp->cgpa<<endl;
+			cout<<"Age of the Student is "<<temp->age<<endl;
+
+		}
+		else
+		{
+			cout<<"No Student Found"<<endl;
+		}
+	}
+}
+
+FindByName(Student *Head)
+{
+	string n;
+	cout<<"Enter Reg Number of the Student"<<endl;
+	getline(cin,n);
+	for(Student *temp = Head; temp!=NULL; temp= temp->next)
+	{
+		if(n==temp->name)
+		{
+			cout<<temp->name<<endl<<endl;
+			cout<<"Registeration Number of the Student is "<<temp->reg<<endl;
+			cout<<"Faculty of the Student is "<<temp->faculty<<endl;
+			cout<<"CGPA of the Student is "<<temp->cgpa<<endl;
+			cout<<"Age of the Student is "<<temp->age<<endl;
+
+		}
+		else
+		{
+			cout<<"No Student Found"<<endl;
+		}
+    }
+}
+
+
+void Delete(Student *Head)
+{
+	int reg;
+	cout<<"Enter Reg Number of the Student"<<endl;
+	cin>>reg;
+	Student *temp1 = Head;
+	for(Student *temp2 = Head->next; temp2!=NULL; temp2= temp2->next)
+	{
+		if(reg==temp2->reg)
+		{
+			temp1->next = temp2->next;
+			delete(temp2);
+		}
+		else
+		{
+			cout<<"No Student Found"<<endl;
+		}
+		temp1 = temp1->next;
+	}
+}
+
+
+void Display(Student *Head)
+{
+	int i= 0;
+	for(Student *temp = Head->next;temp!=NULL;temp = temp->next)
+	{
+		cout<<"Details For Student "<<i+1<<endl<<endl;
+		cout<<"Name of the Student is "<<temp->name<<endl;
+		cout<<"Registeration Number of the Student is "<<temp->reg<<endl;
+		cout<<"Faculty of the Student is "<<temp->faculty<<endl;
+		cout<<"CGPA of the Student is "<<temp->cgpa<<endl;
+		cout<<"Age of the Student is "<<temp->age<<endl;
+	}
+
+}
+
+int main()
+{
+
+	int choice = -1;
+	Student *Head = new Student;
+	Head->next = NULL;
+
+	cout<<"******Welcome to Thakar Student Data Base******"<<endl<<endl;
+
+	cout<<"Enter Your choice"<<endl;
+	cout<<"1. Add Details of a new Student(Beginning)\n2. Add Details of a new Student(End)\n3. Add Details of a new Student(After)\n4. Find A Student(BY REG)\n5. Find A Student(BY NAME)\n6. Delete Student From Database\n7. Display All\n8. PRESS 0 TO EXIT"<<endl;
+
+	cin>>choice;
+
+	while(choice != 0)
+	{
+		switch(choice)
+    	{
+		case 1:
+			{
+				AddatBeg(Head);
+				break;
+			}
+		case 2:
+			{
+				AddatEnd(Head);
+				break;
+			}
+		case 3:
+			{
+				Addafter(Head);
+				break;
+			}
+		case 4:
+			{
+				FindByReg(Head);
+				break;
+			}
+		case 5:
+	      	{
+		    	FindByName(Head);
+		    	break;
+	    	}
+		case 6:
+			{
+				Delete(Head);
+				break;
+			}
+		case 7:
+			{
+				Display(Head);
+				break;
+			}
+
+	    }
+	}
+}
