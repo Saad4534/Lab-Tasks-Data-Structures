@@ -1,0 +1,101 @@
+#include<iostream>
+#include<string.h>
+#include<stdlib.h>
+
+using namespace std;
+
+struct Parking{
+	
+	char park;
+	
+};
+
+void Display(Parking P1,char a[10])
+{
+	for(int i=0;i<10;i++)
+	{
+		if(a[i] == 0)
+		{
+			cout<<i+1<<"This Parking Lot is Empty"<<endl;
+		}
+		else
+		{
+			cout<<i+1<<"Car With Liscene Number "<<a[i]<<" is Parked here"<<endl;
+		}
+	}
+}
+
+void Parkin(Parking P1,char a[10])
+{
+	cout<<"Enter Your Car's Liscene Number\ne.g. (ABC-123)"<<endl;
+	cin>>P1.park;
+	for(int i=0;i<10;i++)
+	{
+		if(a[i]==0)
+		{
+			a[i] = P1.park;
+		}
+	}
+}
+
+void Parkout(Parking P1,char a[10])
+{
+	char liscene;
+	cout<<"Enter Your Car's Liscene Number\ne.g. (ABC-123)"<<endl;
+	cin>>liscene;
+	for(int i=0;i<10;i++)
+	{
+		if(liscene==a[i])
+		{
+			string x;
+			x = a[i];
+			for(int k=10;k>0;k--)
+			{
+				while(a[k]!=a[i-1])
+				{
+					a[k-1]==a[k];
+					a[k]==0;
+				}
+			}
+			for(int j=0;j<10;j++)
+			{
+				int l = 9;
+				while(a[j]!=a[i])
+				{
+					a[l] == a[j];
+					l--;
+				}
+			}
+			cout<<"The Cars Left"<<endl;
+		    break;
+		}
+	}
+	cout<<"No Car Found"<<endl;
+}
+
+int main()
+{
+	Parking P1;
+	char cars[10] = {0,0,0,0,0,0,0,0,0,0};
+	int option;
+	cout<<"Welcome to GIKI Valet Service"<<endl<<endl;
+	while(option!=4)
+	{
+		cout<<"Welcome to GIKI Valet Service"<<endl<<endl;
+      	cout<<"1. Park your Car \n2. Leave\n3. Display Cars in Parking Lot\n4. EXIT PROGRAM"<<endl;
+    	cin>>option;
+   		if(option==1)
+    	{
+     		Parkin(P1,cars);
+    	}
+    	if(option==2)
+    	{
+    		Parkout(P1,cars);
+	    }
+    	if(option==3)
+    	{
+		    Display(P1,cars);
+	    }	
+	}
+}
+
